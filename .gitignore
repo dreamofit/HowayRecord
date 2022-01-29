@@ -1,0 +1,9 @@
+.idea/
+lib/
+target/
+HowayRecord-api/target
+HowayRecord-core/target
+HowayRecord-processor/target
+HowayRecord-provider/target
+HowayRecord-util/target
+HowayRecord-web/target

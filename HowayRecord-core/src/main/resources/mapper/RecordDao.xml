@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ihoway.dao.RecordDao">
+  <resultMap id="BaseResultMap" type="cn.ihoway.entity.Record">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="eventNo" jdbcType="VARCHAR" property="eventNo" />
+    <result column="input" jdbcType="VARCHAR" property="input" />
+    <result column="output" jdbcType="VARCHAR" property="output" />
+    <result column="input_token" jdbcType="VARCHAR" property="inputToken" />
+    <result column="input_time" jdbcType="VARCHAR" property="inputTime" />
+    <result column="input_timestamp" jdbcType="VARCHAR" property="inputTimestamp" />
+    <result column="ip" jdbcType="VARCHAR" property="ip" />
+    <result column="sys_name" jdbcType="VARCHAR" property="sysName" />
+    <result column="output_token" jdbcType="VARCHAR" property="outputToken" />
+    <result column="output_time" jdbcType="VARCHAR" property="outputTime" />
+    <result column="output_timestamp" jdbcType="VARCHAR" property="outputTimestamp" />
+    <result column="time" jdbcType="INTEGER" property="time" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="response_code" jdbcType="INTEGER" property="responseCode" />
+    <result column="backup" jdbcType="VARCHAR" property="backup" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, eventNo, `input`, `output`, input_token, input_time, input_timestamp, ip, sys_name, 
+    output_token, output_time, output_timestamp, `time`, `method`, response_code, `backup`
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from record
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectByEventNo" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from record
+    where eventNo = #{eventNo,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from record
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.ihoway.entity.Record" useGeneratedKeys="true">
+    insert into record (eventNo, `input`, `output`, 
+      input_token, input_time, input_timestamp, 
+      ip, sys_name, output_token, 
+      output_time, output_timestamp, `time`, 
+      `method`, response_code, `backup`
+      )
+    values (#{eventNo,jdbcType=VARCHAR}, #{input,jdbcType=VARCHAR}, #{output,jdbcType=VARCHAR},
+      #{inputToken,jdbcType=VARCHAR}, #{inputTime,jdbcType=VARCHAR}, #{inputTimestamp,jdbcType=VARCHAR}, 
+      #{ip,jdbcType=VARCHAR}, #{sysName,jdbcType=VARCHAR}, #{outputToken,jdbcType=VARCHAR}, 
+      #{outputTime,jdbcType=VARCHAR}, #{outputTimestamp,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, 
+      #{method,jdbcType=VARCHAR}, #{responseCode,jdbcType=INTEGER}, #{backup,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="cn.ihoway.entity.Record" useGeneratedKeys="true">
+    insert into record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="eventNo != null">
+        eventNo,
+      </if>
+      <if test="input != null">
+        `input`,
+      </if>
+      <if test="output != null">
+        `output`,
+      </if>
+      <if test="inputToken != null">
+        input_token,
+      </if>
+      <if test="inputTime != null">
+        input_time,
+      </if>
+      <if test="inputTimestamp != null">
+        input_timestamp,
+      </if>
+      <if test="ip != null">
+        ip,
+      </if>
+      <if test="sysName != null">
+        sys_name,
+      </if>
+      <if test="outputToken != null">
+        output_token,
+      </if>
+      <if test="outputTime != null">
+        output_time,
+      </if>
+      <if test="outputTimestamp != null">
+        output_timestamp,
+      </if>
+      <if test="time != null">
+        `time`,
+      </if>
+      <if test="method != null">
+        `method`,
+      </if>
+      <if test="responseCode != null">
+        response_code,
+      </if>
+      <if test="backup != null">
+        `backup`,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="eventNo != null">
+        #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="input != null">
+        #{input,jdbcType=VARCHAR},
+      </if>
+      <if test="output != null">
+        #{output,jdbcType=VARCHAR},
+      </if>
+      <if test="inputToken != null">
+        #{inputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null">
+        #{inputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTimestamp != null">
+        #{inputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="sysName != null">
+        #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="outputToken != null">
+        #{outputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTime != null">
+        #{outputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTimestamp != null">
+        #{outputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        #{responseCode,jdbcType=INTEGER},
+      </if>
+      <if test="backup != null">
+        #{backup,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.ihoway.entity.Record">
+    update record
+    <set>
+      <if test="eventNo != null">
+        eventNo = #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="input != null">
+        `input` = #{input,jdbcType=VARCHAR},
+      </if>
+      <if test="output != null">
+        `output` = #{output,jdbcType=VARCHAR},
+      </if>
+      <if test="inputToken != null">
+        input_token = #{inputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null">
+        input_time = #{inputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTimestamp != null">
+        input_timestamp = #{inputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="sysName != null">
+        sys_name = #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="outputToken != null">
+        output_token = #{outputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTime != null">
+        output_time = #{outputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTimestamp != null">
+        output_timestamp = #{outputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        `method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        response_code = #{responseCode,jdbcType=INTEGER},
+      </if>
+      <if test="backup != null">
+        `backup` = #{backup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByEventNo" parameterType="cn.ihoway.entity.Record">
+    update record
+    <set>
+      <if test="input != null">
+        `input` = #{input,jdbcType=VARCHAR},
+      </if>
+      <if test="output != null">
+        `output` = #{output,jdbcType=VARCHAR},
+      </if>
+      <if test="inputToken != null">
+        input_token = #{inputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTime != null">
+        input_time = #{inputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="inputTimestamp != null">
+        input_timestamp = #{inputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="ip != null">
+        ip = #{ip,jdbcType=VARCHAR},
+      </if>
+      <if test="sysName != null">
+        sys_name = #{sysName,jdbcType=VARCHAR},
+      </if>
+      <if test="outputToken != null">
+        output_token = #{outputToken,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTime != null">
+        output_time = #{outputTime,jdbcType=VARCHAR},
+      </if>
+      <if test="outputTimestamp != null">
+        output_timestamp = #{outputTimestamp,jdbcType=VARCHAR},
+      </if>
+      <if test="time != null">
+        `time` = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="method != null">
+        `method` = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="responseCode != null">
+        response_code = #{responseCode,jdbcType=INTEGER},
+      </if>
+      <if test="backup != null">
+        `backup` = #{backup,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where eventNo = #{eventNo,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.ihoway.entity.Record">
+    update record
+    set eventNo = #{eventNo,jdbcType=VARCHAR},
+      `input` = #{input,jdbcType=VARCHAR},
+      `output` = #{output,jdbcType=VARCHAR},
+      input_token = #{inputToken,jdbcType=VARCHAR},
+      input_time = #{inputTime,jdbcType=VARCHAR},
+      input_timestamp = #{inputTimestamp,jdbcType=VARCHAR},
+      ip = #{ip,jdbcType=VARCHAR},
+      sys_name = #{sysName,jdbcType=VARCHAR},
+      output_token = #{outputToken,jdbcType=VARCHAR},
+      output_time = #{outputTime,jdbcType=VARCHAR},
+      output_timestamp = #{outputTimestamp,jdbcType=VARCHAR},
+      `time` = #{time,jdbcType=INTEGER},
+      `method` = #{method,jdbcType=VARCHAR},
+      response_code = #{responseCode,jdbcType=INTEGER},
+      `backup` = #{backup,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
