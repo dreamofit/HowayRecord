@@ -17,4 +17,6 @@
     HowayRecord-provider: api服务提供
     HowayRecord-web: restful api提供
 
+## 启动参数
+    --add-opens java.base/java.lang=ALL-UNNAMED
 

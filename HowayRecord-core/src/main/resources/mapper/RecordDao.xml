@@ -4,6 +4,7 @@
   <resultMap id="BaseResultMap" type="cn.ihoway.entity.Record">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="eventNo" jdbcType="VARCHAR" property="eventNo" />
+    <result column="traceId" jdbcType="VARCHAR" property="traceId" />
     <result column="input" jdbcType="VARCHAR" property="input" />
     <result column="output" jdbcType="VARCHAR" property="output" />
     <result column="input_token" jdbcType="VARCHAR" property="inputToken" />
@@ -20,7 +21,7 @@
     <result column="backup" jdbcType="VARCHAR" property="backup" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, eventNo, `input`, `output`, input_token, input_time, input_timestamp, ip, sys_name, 
+    id, eventNo,traceId, `input`, `output`, input_token, input_time, input_timestamp, ip, sys_name,
     output_token, output_time, output_timestamp, `time`, `method`, response_code, `backup`
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
@@ -40,13 +41,13 @@
     where id = #{id,jdbcType=INTEGER}
   </delete>
   <insert id="insert" keyColumn="id" keyProperty="id" parameterType="cn.ihoway.entity.Record" useGeneratedKeys="true">
-    insert into record (eventNo, `input`, `output`, 
+    insert into record (eventNo,traceId, `input`, `output`,
       input_token, input_time, input_timestamp, 
       ip, sys_name, output_token, 
       output_time, output_timestamp, `time`, 
       `method`, response_code, `backup`
       )
-    values (#{eventNo,jdbcType=VARCHAR}, #{input,jdbcType=VARCHAR}, #{output,jdbcType=VARCHAR},
+    values (#{eventNo,jdbcType=VARCHAR}, #{traceId,jdbcType=VARCHAR},#{input,jdbcType=VARCHAR}, #{output,jdbcType=VARCHAR},
       #{inputToken,jdbcType=VARCHAR}, #{inputTime,jdbcType=VARCHAR}, #{inputTimestamp,jdbcType=VARCHAR}, 
       #{ip,jdbcType=VARCHAR}, #{sysName,jdbcType=VARCHAR}, #{outputToken,jdbcType=VARCHAR}, 
       #{outputTime,jdbcType=VARCHAR}, #{outputTimestamp,jdbcType=VARCHAR}, #{time,jdbcType=INTEGER}, 
@@ -58,6 +59,9 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="eventNo != null">
         eventNo,
+      </if>
+      <if test="traceId != null">
+        traceId,
       </if>
       <if test="input != null">
         `input`,
@@ -105,6 +109,9 @@
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="eventNo != null">
         #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="traceId != null">
+        #{traceId,jdbcType=VARCHAR},
       </if>
       <if test="input != null">
         #{input,jdbcType=VARCHAR},
@@ -155,6 +162,12 @@
     <set>
       <if test="eventNo != null">
         eventNo = #{eventNo,jdbcType=VARCHAR},
+      </if>
+      <if test="eventNo != null">
+        traceId = #{traceId,jdbcType=VARCHAR},
+      </if>
+      <if test="traceId != null">
+        traceId = #{traceId,jdbcType=VARCHAR},
       </if>
       <if test="input != null">
         `input` = #{input,jdbcType=VARCHAR},

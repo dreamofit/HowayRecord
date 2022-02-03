@@ -13,14 +13,22 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public int addRecord(Record record) {
         int rs = recordDao.insertSelective(record);
-        sqlSession.commit();
+        if(rs > 0){
+            sqlSession.commit();
+        }else {
+            sqlSession.rollback();
+        }
         return rs;
     }
 
     @Override
     public int UpdateRecord(Record record) {
         int rs = recordDao.updateByEventNo(record);
-        sqlSession.commit();
+        if(rs > 0){
+            sqlSession.commit();
+        }else {
+            sqlSession.rollback();
+        }
         return rs;
     }
 

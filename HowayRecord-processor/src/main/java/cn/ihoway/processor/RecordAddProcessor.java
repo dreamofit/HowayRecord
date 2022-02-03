@@ -16,6 +16,12 @@ public class RecordAddProcessor {
         String ip = addInput.get("ip");
         String sysName = addInput.get("sysName");
         String method = addInput.get("method");
+        String traceId = addInput.get("traceId");
+        String output = addInput.get("output");
+        String outputToken = addInput.get("outputToken");
+        String outputTime = addInput.get("outputTime");
+        String outputTimestamp = addInput.get("outputTimestamp");
+        Integer responseCode = Integer.parseInt(addInput.get("responseCode"));
 
         Record record = new Record();
         record.setEventNo(eventNo);
@@ -26,6 +32,14 @@ public class RecordAddProcessor {
         record.setInputTimestamp(inputTimestamp);
         record.setSysName(sysName);
         record.setMethod(method);
+        record.setTraceId(traceId);
+        record.setOutput(output);
+        record.setOutputTime(outputTime);
+        record.setOutputToken(outputToken);
+        record.setOutputTimestamp(outputTimestamp);
+        record.setResponseCode(responseCode);
+        int time = (int) (Long.parseLong(outputTimestamp) - Long.parseLong(inputTimestamp));
+        record.setTime(time);
 
         RecordService recordService = new RecordServiceImpl();
         return recordService.addRecord(record);

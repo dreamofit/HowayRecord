@@ -16,6 +16,8 @@ public class Record implements Serializable {
      */
     private String eventNo;
 
+    private String traceId;
+
     /**
      * 请求json
      */
