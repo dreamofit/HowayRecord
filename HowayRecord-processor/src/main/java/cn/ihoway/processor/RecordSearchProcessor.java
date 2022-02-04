@@ -8,7 +8,7 @@ import com.alibaba.fastjson.JSON;
 import java.util.HashMap;
 
 public class RecordSearchProcessor {
-    public HashMap<String,Object> doExcute(String eventNo){
+    public HashMap<String,Object> doExecute(String eventNo){
         RecordService recordService = new RecordServiceImpl();
         Record record = recordService.findByEventNo(eventNo);
         return JSON.parseObject(JSON.toJSONString(record),HashMap.class);

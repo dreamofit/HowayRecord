@@ -7,7 +7,7 @@ import cn.ihoway.entity.Record;
 import java.util.HashMap;
 
 public class RecordUpdateProcessor {
-    public int doExcute(HashMap<String,String> updateInput){
+    public int doExecute(HashMap<String,String> updateInput){
         RecordService recordService = new RecordServiceImpl();
         String eventNo = updateInput.get("eventNo");
         Record record = recordService.findByEventNo(eventNo);

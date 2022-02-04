@@ -36,4 +36,9 @@ public class RecordServiceImpl implements RecordService {
     public Record findByEventNo(String eventNo) {
         return recordDao.selectByEventNo(eventNo);
     }
+
+    @Override
+    public void free() {
+        sqlSession.close();
+    }
 }

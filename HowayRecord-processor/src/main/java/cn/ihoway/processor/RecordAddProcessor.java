@@ -7,7 +7,7 @@ import cn.ihoway.entity.Record;
 import java.util.HashMap;
 
 public class RecordAddProcessor {
-    public int doExcute(HashMap<String,String> addInput){
+    public int doExecute(HashMap<String,String> addInput){
         String eventNo = addInput.get("eventNo");
         String input = addInput.get("input");
         String inputToken = addInput.get("inputToken");
@@ -42,6 +42,8 @@ public class RecordAddProcessor {
         record.setTime(time);
 
         RecordService recordService = new RecordServiceImpl();
-        return recordService.addRecord(record);
+        int rs = recordService.addRecord(record);
+        recordService.free();
+        return rs;
     }
 }
