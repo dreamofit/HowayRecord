@@ -11,6 +11,7 @@ public class RecordSearchProcessor {
     public HashMap<String,Object> doExecute(String eventNo){
         RecordService recordService = new RecordServiceImpl();
         Record record = recordService.findByEventNo(eventNo);
+        recordService.free();
         return JSON.parseObject(JSON.toJSONString(record),HashMap.class);
     }
 }

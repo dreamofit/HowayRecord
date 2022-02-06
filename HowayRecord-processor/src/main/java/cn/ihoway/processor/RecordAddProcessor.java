@@ -18,6 +18,9 @@ public class RecordAddProcessor {
         String method = addInput.get("method");
         String traceId = addInput.get("traceId");
         String output = addInput.get("output");
+        if(output.length() >= 4096){
+            output = output.replaceAll("\"data\":.*,",""); //去掉data
+        }
         String outputToken = addInput.get("outputToken");
         String outputTime = addInput.get("outputTime");
         String outputTimestamp = addInput.get("outputTimestamp");
@@ -40,10 +43,12 @@ public class RecordAddProcessor {
         record.setResponseCode(responseCode);
         int time = (int) (Long.parseLong(outputTimestamp) - Long.parseLong(inputTimestamp));
         record.setTime(time);
-
         RecordService recordService = new RecordServiceImpl();
-        int rs = recordService.addRecord(record);
-        recordService.free();
-        return rs;
+        Thread t = new Thread(() -> {
+            recordService.addRecord(record);
+            recordService.free();
+        });
+        t.start();
+        return 1;
     }
 }
