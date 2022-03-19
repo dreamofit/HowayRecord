@@ -1,7 +1,5 @@
 package cn.ihoway.processor;
 
-import cn.ihoway.Impl.RecordService;
-import cn.ihoway.Impl.RecordServiceImpl;
 import cn.ihoway.entity.Record;
 import cn.ihoway.redis.RecordCache;
 

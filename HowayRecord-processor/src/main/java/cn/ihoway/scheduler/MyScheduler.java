@@ -7,8 +7,8 @@ public class MyScheduler {
         try {
             SchedulerConfig scheduler = new SchedulerConfig();
             scheduler.init();
-            //每两分钟持久化一次数据库
-            scheduler.addJob(AutoWriteToDb.class,"0 0/2 * * * ?");
+            //每五分钟持久化一次数据库
+            scheduler.addJob(AutoWriteToDb.class,"0 0/5 * * * ?");
             scheduler.run();
         } catch (SchedulerException e) {
             e.printStackTrace();
