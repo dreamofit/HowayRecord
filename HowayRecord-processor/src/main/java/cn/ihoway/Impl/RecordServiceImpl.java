@@ -5,6 +5,8 @@ import cn.ihoway.entity.Record;
 import cn.ihoway.util.MybatisUtils;
 import org.apache.ibatis.session.SqlSession;
 
+import java.util.List;
+
 public class RecordServiceImpl implements RecordService {
 
     private final SqlSession sqlSession = MybatisUtils.getSqlSession();
@@ -40,5 +42,10 @@ public class RecordServiceImpl implements RecordService {
     @Override
     public void free() {
         sqlSession.close();
+    }
+
+    @Override
+    public List<Record> selectAll() {
+        return recordDao.selectAll();
     }
 }

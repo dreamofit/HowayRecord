@@ -3,6 +3,7 @@ package cn.ihoway.processor;
 import cn.ihoway.Impl.RecordService;
 import cn.ihoway.Impl.RecordServiceImpl;
 import cn.ihoway.entity.Record;
+import cn.ihoway.redis.RecordCache;
 
 import java.util.HashMap;
 
@@ -43,12 +44,8 @@ public class RecordAddProcessor {
         record.setResponseCode(responseCode);
         int time = (int) (Long.parseLong(outputTimestamp) - Long.parseLong(inputTimestamp));
         record.setTime(time);
-        RecordService recordService = new RecordServiceImpl();
-        Thread t = new Thread(() -> {
-            recordService.addRecord(record);
-            recordService.free();
-        });
-        t.start();
+        RecordCache recordCache = new RecordCache();
+        recordCache.add(record);
         return 1;
     }
 }

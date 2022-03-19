@@ -2,6 +2,8 @@ package cn.ihoway.dao;
 
 import cn.ihoway.entity.Record;
 
+import java.util.List;
+
 public interface RecordDao {
     int deleteByPrimaryKey(Integer id);
 
@@ -12,6 +14,8 @@ public interface RecordDao {
     Record selectByPrimaryKey(Integer id);
 
     Record selectByEventNo(String eventNo);
+
+    List<Record> selectAll();
 
     int updateByPrimaryKeySelective(Record record);
 

@@ -37,6 +37,11 @@
     from record
     where eventNo = #{eventNo,jdbcType=VARCHAR}
   </select>
+  <select id="selectAll" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from record
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from record
     where id = #{id,jdbcType=INTEGER}
