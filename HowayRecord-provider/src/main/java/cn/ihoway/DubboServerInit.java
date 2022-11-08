@@ -2,7 +2,6 @@ package cn.ihoway;
 
 import cn.ihoway.redis.RecordCache;
 import cn.ihoway.scheduler.MyScheduler;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
