@@ -12,4 +12,5 @@ class RecordCacheTest {
     void getSize() {
         System.out.println(recordCache.getSize());
     }
+
 }

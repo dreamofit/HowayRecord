@@ -14,8 +14,7 @@
     HowayRecord-processor： 处理器层，各服务核心处理逻辑
     HowayRecord-util: 工具库
     HowayRecord-api: dubbo api
-    HowayRecord-provider: api服务提供
-    HowayRecord-web: restful api提供
+    HowayRecord-access:服务入口
 
 ## 启动参数
     --add-opens java.base/java.lang=ALL-UNNAMED

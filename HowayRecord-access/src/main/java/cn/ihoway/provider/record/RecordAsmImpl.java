@@ -1,4 +1,4 @@
-package cn.ihoway.record;
+package cn.ihoway.provider.record;
 
 import cn.ihoway.api.record.RecordAsm;
 import cn.ihoway.processor.RecordAddProcessor;

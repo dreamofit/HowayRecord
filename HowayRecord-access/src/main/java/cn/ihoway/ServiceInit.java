@@ -2,15 +2,15 @@ package cn.ihoway;
 
 import cn.ihoway.redis.RecordCache;
 import cn.ihoway.scheduler.MyScheduler;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 import java.io.IOException;
 
-/**
- * 初始化dubbo服务
- */
-public class DubboServerInit {
-    public static void main(String[] args) throws IOException {
+@SpringBootApplication
+public class ServiceInit {
+    public static void main( String[] args ) throws IOException {
         RecordCache recordCache = new RecordCache();
         recordCache.init();
         MyScheduler.execute();
@@ -19,5 +19,6 @@ public class DubboServerInit {
         context.start();
         System.out.println("*** HowayRecord服务已经启动 ***");
         System.in.read();
+        SpringApplication.run(ServiceInit.class, args);
     }
 }
