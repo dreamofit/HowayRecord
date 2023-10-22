@@ -3,16 +3,15 @@ package cn.ihoway.redis;
 import cn.ihoway.Impl.RecordService;
 import cn.ihoway.Impl.RecordServiceImpl;
 import cn.ihoway.entity.Record;
+import cn.ihoway.util.HowayContainer;
 import cn.ihoway.util.HowayRedisCache;
 import org.mybatis.caches.redis.SerializeUtil;
 
 import java.util.List;
 import java.util.Map;
 
-
 public class RecordCache {
-    private HowayRedisCache cache = new HowayRedisCache("cn.ihoway.entity.Record");;
-    private final RecordService service = new RecordServiceImpl();
+    private HowayRedisCache cache = new HowayRedisCache("cn.ihoway.entity.Record");
 
     /**
      * 缓存初始化
@@ -40,6 +39,7 @@ public class RecordCache {
      * 将缓存内容存入数据库中
      */
     public void putDb(){
+        RecordService service = (RecordServiceImpl) HowayContainer.getBean("recordServiceImpl");
         Map<byte[], byte[]> dataMap = cache.getAll();
         for(byte[] key:dataMap.keySet()){
             Record record = (Record) SerializeUtil.unserialize(dataMap.get(key));
@@ -63,6 +63,7 @@ public class RecordCache {
      * 从数据库获取数据
      */
     private void getFormDb(){
+        RecordService service = (RecordServiceImpl) HowayContainer.getBean("recordServiceImpl");
         List<Record> list = service.selectAll();
         for(Record record:list){
             if(cache.getObject(record.getEventNo()) == null){

@@ -44,7 +44,8 @@ final class RedisConfigurationBuilder {
 
             }
         }
-
+        //重写config，以便获取环境变量的值
+        CommonUtils.getByEnv(config);
         RedisConfig jedisConfig = new RedisConfig();
         this.setConfigProperties(config, jedisConfig);
         return jedisConfig;

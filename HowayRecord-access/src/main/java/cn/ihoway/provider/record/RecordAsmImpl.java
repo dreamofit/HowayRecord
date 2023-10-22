@@ -3,27 +3,23 @@ package cn.ihoway.provider.record;
 import cn.ihoway.api.record.RecordAsm;
 import cn.ihoway.processor.RecordAddProcessor;
 import cn.ihoway.processor.RecordSearchProcessor;
-import cn.ihoway.processor.RecordUpdateProcessor;
-
+import cn.ihoway.util.HowayContainer;
+import com.alibaba.fastjson.JSON;
 import java.util.HashMap;
 
 public class RecordAsmImpl implements RecordAsm {
 
+    private final RecordSearchProcessor recordSearchProcessor = (RecordSearchProcessor) HowayContainer.getBean("recordSearchProcessor");
+
+    private final RecordAddProcessor recordAddProcessor = (RecordAddProcessor) HowayContainer.getBean("recordAddProcessor");
+
     @Override
     public int addRecord(HashMap<String, String> addInput) {
-        RecordAddProcessor recordAddProcessor = new RecordAddProcessor();
         return recordAddProcessor.doExecute(addInput);
     }
 
-
-    public int updateRecord(HashMap<String, String> updateInput) {
-        RecordUpdateProcessor recordUpdateProcessor = new RecordUpdateProcessor();
-        return recordUpdateProcessor.doExecute(updateInput);
-    }
-
     @Override
-    public HashMap<String,Object> findByEventNo(String eventNo) {
-        RecordSearchProcessor recordSearchProcessor = new RecordSearchProcessor();
+    public HashMap<String,Object> findByEventNo(String eventNo) throws Exception {
         return recordSearchProcessor.doExecute(eventNo);
     }
 }

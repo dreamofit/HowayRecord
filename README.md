@@ -16,6 +16,9 @@
     HowayRecord-api: dubbo api
     HowayRecord-access:服务入口
 
-## 启动参数
+## 启动参数（不再需要）
     --add-opens java.base/java.lang=ALL-UNNAMED
 
+## 环境变量
+    SERVICE_ADDR=192.168.0.1 主机地址
+    MYSQL_PASS=xxx mysql密码

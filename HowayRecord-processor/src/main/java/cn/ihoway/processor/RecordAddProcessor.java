@@ -2,11 +2,15 @@ package cn.ihoway.processor;
 
 import cn.ihoway.entity.Record;
 import cn.ihoway.redis.RecordCache;
+import cn.ihoway.util.HowayContainer;
 
 import java.util.HashMap;
 
 public class RecordAddProcessor {
+
     public int doExecute(HashMap<String,String> addInput){
+        RecordCache recordCache = (RecordCache) HowayContainer.getBean("recordCache");
+        Record record = (Record) HowayContainer.getBean("record");
         String eventNo = addInput.get("eventNo");
         String input = addInput.get("input");
         String inputToken = addInput.get("inputToken");
@@ -24,8 +28,6 @@ public class RecordAddProcessor {
         String outputTime = addInput.get("outputTime");
         String outputTimestamp = addInput.get("outputTimestamp");
         Integer responseCode = Integer.parseInt(addInput.get("responseCode"));
-
-        Record record = new Record();
         record.setEventNo(eventNo);
         record.setInput(input);
         record.setInputTime(inputTime);
@@ -42,7 +44,6 @@ public class RecordAddProcessor {
         record.setResponseCode(responseCode);
         int time = (int) (Long.parseLong(outputTimestamp) - Long.parseLong(inputTimestamp));
         record.setTime(time);
-        RecordCache recordCache = new RecordCache();
         recordCache.add(record);
         return 1;
     }
